@@ -1,0 +1,134 @@
+/* src/App.css */
+
+/* 1. Global Reset & Dark Theme Background */
+:root {
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color-scheme: dark; /* Tells browser to use dark scrollbars */
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #1a1a1a;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+/* 2. The Main Container */
+.App {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 50px;
+}
+
+/* 3. The Input Area (Add Task) */
+.add-task-container {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 30px;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 10px 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px); /* Glass effect */
+  margin-left: 60%;
+}
+
+.add-task-container input {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #444;
+  background: #252525;
+  color: white;
+  font-size: 1rem;
+  outline: none;
+  min-width: 250px;
+}
+
+.add-task-container input:focus {
+  border-color: #646cff;
+}
+
+.add-task-container button {
+  padding: 10px 20px;
+  background: #646cff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.add-task-container button:hover {
+  background: #535bf2;
+}
+
+/* 4. The Board Layout (Columns) */
+.board-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 25px; /* Space between columns */
+  width: 100%;
+  max-width: 1400px;
+  flex-wrap: wrap; /* Good for mobile */
+  margin-top: 20px;
+  margin-left: 60%;
+}
+
+/* 5. Individual Columns */
+.column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.03); /* Very subtle background */
+  border-radius: 12px;
+  padding: 15px;
+  min-width: 280px;
+}
+
+.column h2 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: #ddd;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* 6. The Drag and Drop Area */
+.droppable-area {
+  padding: 8px;
+  width: 260px;
+  min-height: 400px;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.2); /* Darker inner area */
+  border: 2px dashed rgba(255, 255, 255, 0.1);
+  transition: background 0.2s;
+}
+
+/* 7. The Draggable Card */
+.task-card {
+  user-select: none;
+  padding: 16px;
+  margin: 0 0 12px 0;
+  min-height: 50px;
+  background-color: #2d2d44;
+  color: #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  border: 1px solid #3a3a55;
+}
+
+/* Hover effect on cards */
+.task-card:hover {
+  border-color: #646cff;
+}
