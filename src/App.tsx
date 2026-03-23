@@ -3,7 +3,6 @@ import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import type { DropResult } from "@hello-pangea/dnd";
 import { v4 as uuidv4 } from "uuid";
 import "./App.css";
-import LiquidEther from "./LiquidEther";
 
 // --- Types ---
 interface Task {
@@ -37,7 +36,7 @@ const App: React.FC = () => {
     localStorage.setItem("kanban-data", JSON.stringify(columns));
   }, [columns]);
 
-  // NEW: Logic to make tasks in "Done" disappear after 7 seconds
+  // Logic to make tasks in "Done" disappear after 7 seconds
   useEffect(() => {
     const doneColumnEntry = Object.entries(columns).find(([_, col]) => col.name === "Done");
     if (!doneColumnEntry) return;
@@ -50,10 +49,10 @@ const App: React.FC = () => {
           ...prev,
           [doneColumnId]: {
             ...prev[doneColumnId],
-            items: [] // Clears the "Done" column
+            items: [] 
           }
         }));
-      }, 7000); // 7 second delay
+      }, 7000);
 
       return () => clearTimeout(timer);
     }
@@ -99,14 +98,7 @@ const App: React.FC = () => {
 
   return (
     <div className="App">
-      <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', zIndex: -1 }}>
-         <LiquidEther 
-            mouseForce={25}
-            isViscous={false}
-            viscous={10}
-            colors={["#1e1e2e", "#535bf2", "#2d2d44", "#000000"]} 
-         />
-      </div>
+      {/* Background Layer Removed */}
 
       <div className="add-task-container">
         <input
@@ -132,7 +124,7 @@ const App: React.FC = () => {
                     style={{
                       background: snapshot.isDraggingOver
                         ? "rgba(100, 108, 255, 0.1)"
-                        : "rgba(255, 255, 255, 0.02)",
+                        : "rgba(0, 0, 0, 0.05)",
                     }}
                   >
                     {column.items.map((item, index) => (
@@ -144,7 +136,8 @@ const App: React.FC = () => {
                             {...provided.dragHandleProps}
                             className="task-card"
                             style={{
-                              backgroundColor: snapshot.isDragging ? "#535bf2" : "#2d2d44",
+                              backgroundColor: snapshot.isDragging ? "#646cff" : "#ffffff",
+                              color: snapshot.isDragging ? "#ffffff" : "#333333",
                               ...provided.draggableProps.style,
                             }}
                           >
