@@ -1,53 +1,53 @@
 /* src/App.css */
 
-/* 1. Global Reset & Dark Theme Background */
 :root {
   font-family: 'Poppins', sans-serif;
   line-height: 1.5;
   font-weight: 400;
-  color-scheme: dark; /* Tells browser to use dark scrollbars */
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #1a1a1a;
+  color-scheme: dark;
+  color: rgba(255, 255, 255, 0.95);
+  background-color: #0f0f12;
 }
 
 body {
   margin: 0;
-  min-width: 320px;
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
-/* 2. The Main Container */
 .App {
   width: 100%;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 50px;
+  padding: 40px 20px;
 }
 
-/* 3. The Input Area (Add Task) */
+/* 3. The Input Area - Centered and Styled */
 .add-task-container {
   display: flex;
   gap: 12px;
-  margin-bottom: 30px;
-  background: rgba(255, 255, 255, 0.05);
-  padding: 10px 20px;
-  border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(10px); /* Glass effect */
-  margin-left: 60%;
+  margin-bottom: 50px;
+  background: rgba(255, 255, 255, 0.07);
+  padding: 12px 24px;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  /* Removed margin-left: 60% to center it */
 }
 
 .add-task-container input {
-  padding: 12px;
-  border-radius: 8px;
-  border: 1px solid #444;
-  background: #252525;
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.3);
   color: white;
   font-size: 1rem;
   outline: none;
-  min-width: 250px;
+  min-width: 300px;
+  transition: border-color 0.3s;
 }
 
 .add-task-container input:focus {
@@ -55,80 +55,87 @@ body {
 }
 
 .add-task-container button {
-  padding: 10px 20px;
+  padding: 10px 24px;
   background: #646cff;
   color: white;
   border: none;
-  border-radius: 8px;
-  font-weight: bold;
+  border-radius: 10px;
+  font-weight: 600;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: all 0.2s;
 }
 
 .add-task-container button:hover {
   background: #535bf2;
+  transform: translateY(-1px);
 }
 
-/* 4. The Board Layout (Columns) */
+/* 4. The Board Layout - Centered properly */
 .board-container {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  gap: 25px; /* Space between columns */
+  gap: 30px;
   width: 100%;
-  max-width: 1400px;
-  flex-wrap: wrap; /* Good for mobile */
-  margin-top: 20px;
-  margin-left: 60%;
+  max-width: 1200px;
+  flex-wrap: wrap;
+  /* Removed margin-left: 60% to center it */
 }
 
-/* 5. Individual Columns */
+/* 5. Individual Columns - Enhanced Visuals */
 .column {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  background: rgba(255, 255, 255, 0.03); /* Very subtle background */
-  border-radius: 12px;
-  padding: 15px;
-  min-width: 280px;
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(8px);
+  border-radius: 16px;
+  padding: 20px;
+  min-width: 300px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
 .column h2 {
-  font-size: 1.2rem;
-  font-weight: 600;
-  margin-bottom: 15px;
-  color: #ddd;
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #fff;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 1.5px;
+  text-align: center;
+  border-bottom: 2px solid #646cff;
+  padding-bottom: 8px;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* 6. The Drag and Drop Area */
 .droppable-area {
-  padding: 8px;
-  width: 260px;
-  min-height: 400px;
-  border-radius: 8px;
-  background: rgba(0, 0, 0, 0.2); /* Darker inner area */
-  border: 2px dashed rgba(255, 255, 255, 0.1);
-  transition: background 0.2s;
+  padding: 10px;
+  width: 280px;
+  min-height: 500px;
+  border-radius: 12px;
+  transition: background 0.3s ease;
 }
 
 /* 7. The Draggable Card */
 .task-card {
   user-select: none;
-  padding: 16px;
-  margin: 0 0 12px 0;
-  min-height: 50px;
-  background-color: #2d2d44;
-  color: #e0e0e0;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  padding: 18px;
+  margin-bottom: 15px;
+  background: rgba(45, 45, 68, 0.8);
+  color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   display: flex;
   align-items: center;
-  border: 1px solid #3a3a55;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: transform 0.2s ease, border-color 0.2s ease;
 }
 
-/* Hover effect on cards */
 .task-card:hover {
+  transform: translateY(-2px);
   border-color: #646cff;
+  background: rgba(58, 58, 85, 0.9);
 }
