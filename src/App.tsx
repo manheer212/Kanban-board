@@ -8,6 +8,7 @@ import "./App.css";
 interface Task {
   id: string;
   content: string;
+  color?: string;
 }
 interface Column {
   name: string;
@@ -17,7 +18,8 @@ interface Columns {
   [key: string]: Column;
 }
 
-// --- Initial Data ---
+const stickyColors = ["#fff740", "#ff7eb9", "#7afcff", "#feff9c", "#ff9ebb"];
+
 const columnsFromBackend: Columns = {
   [uuidv4()]: { name: "To Do", items: [] },
   [uuidv4()]: { name: "In Progress", items: [] },
@@ -40,20 +42,15 @@ const App: React.FC = () => {
   useEffect(() => {
     const doneColumnEntry = Object.entries(columns).find(([_, col]) => col.name === "Done");
     if (!doneColumnEntry) return;
-
     const [doneColumnId, doneColumn] = doneColumnEntry;
 
     if (doneColumn.items.length > 0) {
       const timer = setTimeout(() => {
         setColumns(prev => ({
           ...prev,
-          [doneColumnId]: {
-            ...prev[doneColumnId],
-            items: [] 
-          }
+          [doneColumnId]: { ...prev[doneColumnId], items: [] }
         }));
       }, 7000);
-
       return () => clearTimeout(timer);
     }
   }, [columns]);
@@ -87,7 +84,8 @@ const App: React.FC = () => {
     if (!newTaskContent) return;
     const firstColumnId = Object.keys(columns)[0];
     const column = columns[firstColumnId];
-    const newTask: Task = { id: uuidv4(), content: newTaskContent };
+    const randomColor = stickyColors[Math.floor(Math.random() * stickyColors.length)];
+    const newTask: Task = { id: uuidv4(), content: newTaskContent, color: randomColor };
     
     setColumns({
       ...columns,
@@ -98,16 +96,14 @@ const App: React.FC = () => {
 
   return (
     <div className="App">
-      {/* Background Layer Removed */}
-
       <div className="add-task-container">
         <input
           type="text"
           value={newTaskContent}
           onChange={(e) => setNewTaskContent(e.target.value)}
-          placeholder="Type new task..."
+          placeholder="Pin a new note..."
         />
-        <button onClick={addTask}>Add Task</button>
+        <button onClick={addTask}>Pin Note</button>
       </div>
 
       <div className="board-container">
@@ -123,8 +119,8 @@ const App: React.FC = () => {
                     className="droppable-area"
                     style={{
                       background: snapshot.isDraggingOver
-                        ? "rgba(100, 108, 255, 0.1)"
-                        : "rgba(0, 0, 0, 0.05)",
+                        ? "rgba(255, 255, 255, 0.1)"
+                        : "transparent",
                     }}
                   >
                     {column.items.map((item, index) => (
@@ -134,11 +130,16 @@ const App: React.FC = () => {
                             ref={provided.innerRef}
                             {...provided.draggableProps}
                             {...provided.dragHandleProps}
-                            className="task-card"
+                            className="task-card sticky-note"
                             style={{
-                              backgroundColor: snapshot.isDragging ? "#646cff" : "#ffffff",
-                              color: snapshot.isDragging ? "#ffffff" : "#333333",
+                              backgroundColor: item.color || "#fff740",
+                              /* Maintain the drag physics provided by library */
                               ...provided.draggableProps.style,
+                              /* Add subtle visual cue when dragging */
+                              opacity: snapshot.isDragging ? 0.9 : 1,
+                              transform: snapshot.isDragging 
+                                ? `${provided.draggableProps.style?.transform} scale(1.05)` 
+                                : provided.draggableProps.style?.transform,
                             }}
                           >
                             {item.content}
@@ -156,5 +157,6 @@ const App: React.FC = () => {
       </div>
     </div>
   );
-}
+};
+
 export default App;
