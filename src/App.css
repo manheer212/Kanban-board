@@ -7,7 +7,7 @@
 body {
   margin: 0;
   min-height: 100vh;
-  /* Real board look: Deep wood color with a grain texture */
+  /* Board look: Wood texture */
   background-color: #4e342e;
   background-image: url("https://www.transparenttextures.com/patterns/wood-pattern.png");
 }
@@ -17,115 +17,125 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: center; /* Centers items horizontally */
+  justify-content: flex-start;
   padding: 40px 20px;
 }
 
+/* Centered Input Area */
 .add-task-container {
   display: flex;
   gap: 12px;
-  margin-bottom: 40px;
-  background: rgba(255, 255, 255, 0.9);
-  padding: 15px 25px;
+  margin-bottom: 50px;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 12px 20px;
   border-radius: 4px;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-  border-bottom: 4px solid #ccc;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+  border-bottom: 4px solid #bbb;
+  width: fit-content; /* Ensure it doesn't stretch */
 }
 
 .add-task-container input {
-  padding: 12px;
+  padding: 10px;
   border: 1px solid #ddd;
-  font-size: 1rem;
+  font-size: 0.9rem;
   outline: none;
-  min-width: 250px;
+  min-width: 200px;
   border-radius: 4px;
 }
 
 .add-task-container button {
-  padding: 10px 20px;
+  padding: 8px 16px;
   background: #2e7d32;
   color: white;
   border: none;
   border-radius: 4px;
   font-weight: bold;
   cursor: pointer;
-  transition: background 0.2s;
 }
 
+/* Centered Board Container */
 .board-container {
   display: flex;
-  justify-content: center;
-  gap: 40px;
+  justify-content: center; /* Centers columns within the container */
+  gap: 30px;
   width: 100%;
-  max-width: 1300px;
+  max-width: 1200px;
   flex-wrap: wrap;
 }
 
 .column {
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.25);
   border-radius: 4px;
-  padding: 20px;
-  min-width: 300px;
-  border: 10px solid #3e2723; /* Darker frame */
-  box-shadow: inset 0 0 15px rgba(0,0,0,0.5);
+  padding: 15px;
+  min-width: 250px; /* Reduced width */
+  border: 8px solid #3e2723;
+  box-shadow: inset 0 0 15px rgba(0,0,0,0.6);
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centers content within column */
 }
 
 .column h2 {
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   color: #fff;
   text-shadow: 2px 2px 4px #000;
-  margin-bottom: 25px;
-  text-align: center;
+  margin-bottom: 20px;
   text-transform: uppercase;
-  letter-spacing: 2px;
+  letter-spacing: 1.5px;
 }
 
 .droppable-area {
-  padding: 10px;
-  min-height: 500px;
+  padding: 5px;
+  min-height: 400px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-/* Sticky Note Styles */
+/* Smaller Sticky Note Styles */
 .sticky-note {
   user-select: none;
-  padding: 20px;
-  margin-bottom: 20px;
-  width: 240px;
-  min-height: 140px;
+  padding: 12px;
+  margin-bottom: 15px;
+  width: 160px; /* Significantly reduced width */
+  min-height: 100px; /* Reduced height */
   color: #333;
+  font-size: 0.85rem;
   font-weight: 500;
-  box-shadow: 5px 5px 7px rgba(0,0,0,0.4);
+  box-shadow: 3px 3px 6px rgba(0,0,0,0.4);
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
   position: relative;
-  transition: transform 0.2s ease;
+  transition: transform 0.1s ease;
+  overflow-wrap: break-word; /* Ensure text fits */
 }
 
-/* Give notes a slight random tilt */
+/* Subtle tilts */
 .column:nth-child(odd) .sticky-note {
-  transform: rotate(-2deg);
+  transform: rotate(-1.5deg);
 }
 
 .column:nth-child(even) .sticky-note {
-  transform: rotate(1.5deg);
+  transform: rotate(1deg);
 }
 
 .sticky-note:hover {
   transform: scale(1.05) rotate(0deg) !important;
   z-index: 10;
-  box-shadow: 10px 10px 15px rgba(0,0,0,0.5);
+  box-shadow: 6px 6px 12px rgba(0,0,0,0.5);
 }
 
-/* Adding a "Tape" effect at the top */
+/* Adjusted "Pin/Tape" effect for smaller note */
 .sticky-note::before {
   content: "";
   position: absolute;
-  top: -8px;
+  top: -6px;
   left: 35%;
-  width: 60px;
-  height: 20px;
-  background: rgba(255, 255, 255, 0.3);
-  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
-  transform: rotate(-1deg);
+  width: 40px;
+  height: 14px;
+  background: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 1px 1px rgba(0,0,0,0.2);
 }

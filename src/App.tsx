@@ -38,7 +38,6 @@ const App: React.FC = () => {
     localStorage.setItem("kanban-data", JSON.stringify(columns));
   }, [columns]);
 
-  // Logic to make tasks in "Done" disappear after 7 seconds
   useEffect(() => {
     const doneColumnEntry = Object.entries(columns).find(([_, col]) => col.name === "Done");
     if (!doneColumnEntry) return;
@@ -133,13 +132,8 @@ const App: React.FC = () => {
                             className="task-card sticky-note"
                             style={{
                               backgroundColor: item.color || "#fff740",
-                              /* Maintain the drag physics provided by library */
+                              opacity: snapshot.isDragging ? 0.8 : 1,
                               ...provided.draggableProps.style,
-                              /* Add subtle visual cue when dragging */
-                              opacity: snapshot.isDragging ? 0.9 : 1,
-                              transform: snapshot.isDragging 
-                                ? `${provided.draggableProps.style?.transform} scale(1.05)` 
-                                : provided.draggableProps.style?.transform,
                             }}
                           >
                             {item.content}
